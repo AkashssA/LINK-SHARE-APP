@@ -76,7 +76,7 @@ else:
                 st.success("✅ Link Created Successfully!")
                 
                 # NOTE: Update 'localhost:8501' to your actual domain after deploying
-                share_url = f"http://localhost:8501/?id={slug}"
+               share_url = f"https://link-share-app-j41g.onrender.com/?id={slug}"
                 
                 st.subheader("Your Shareable Link:")
                 st.code(share_url)
