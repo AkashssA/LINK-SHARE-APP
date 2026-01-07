@@ -67,17 +67,14 @@ else:
             # Determine the Slug
             slug = custom_slug.strip() if custom_slug.strip() else ''.join(random.choices(string.ascii_letters + string.digits, k=8))
             
-            try:
+           try:
                 # Attempt to insert into Supabase
-                # We use .insert() - Supabase will throw an error if 'slug' is not unique
                 response = supabase.table("pastes").insert({"slug": slug, "content": content}).execute()
                 
-                # If successful:
                 st.success("✅ Link Created Successfully!")
                 
-                # NOTE: Update 'localhost:8501' to your actual domain after deploying
-               share_url = f"https://link-share-app-j41g.onrender.com/?id={slug}"
-                
+                # These three MUST align perfectly
+                share_url = f"https://link-share-app-j41g.onrender.com/?id={slug}"
                 st.subheader("Your Shareable Link:")
                 st.code(share_url)
                 st.balloons()
