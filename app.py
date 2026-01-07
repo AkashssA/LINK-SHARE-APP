@@ -67,14 +67,15 @@ else:
             # Determine the Slug
             slug = custom_slug.strip() if custom_slug.strip() else ''.join(random.choices(string.ascii_letters + string.digits, k=8))
             
-           try:
+            try:
                 # Attempt to insert into Supabase
                 response = supabase.table("pastes").insert({"slug": slug, "content": content}).execute()
                 
                 st.success("✅ Link Created Successfully!")
                 
-                # These three MUST align perfectly
+                # The final Render URL
                 share_url = f"https://link-share-app-j41g.onrender.com/?id={slug}"
+                
                 st.subheader("Your Shareable Link:")
                 st.code(share_url)
                 st.balloons()
@@ -82,7 +83,7 @@ else:
             except Exception as e:
                 # Check if it's a unique constraint error
                 if "duplicate key" in str(e).lower() or "already exists" in str(e).lower():
-                    st.error(f"❌ The ID '{slug}' is already taken. Please try a different Custom ID or leave it blank for a random one.")
+                    st.error(f"❌ The ID '{slug}' is already taken. Please try a different ID.")
                 else:
                     st.error("❌ An unexpected database error occurred.")
                     st.info(f"Debug Info: {e}")
